@@ -1,0 +1,12 @@
+{
+  "name": "nderim-skills",
+  "description": "Nderim's Claude Code skills",
+  "owner": { "name": "Nderim Krasniqi" },
+  "plugins": [
+    {
+      "name": "product-workflow",
+      "source": "./plugins/product-workflow",
+      "description": "Planning workflow: product-discovery → domain-modeling → journey-specification → solution-design → implementation-plan."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "tasks": {
+    "TASK-01": {"deps": [], "refs": ["J-01", "D-01", "ADR-01"], "releaseGate": true}
+  }
+}

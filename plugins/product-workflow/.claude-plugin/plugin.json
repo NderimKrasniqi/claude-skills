@@ -1,0 +1,6 @@
+{
+  "name": "product-workflow",
+  "version": "1.0.0",
+  "description": "Planning workflow for new products and large features: product-discovery → domain-modeling → journey-specification → solution-design → implementation-plan.",
+  "author": { "name": "Nderim Krasniqi" }
+}
