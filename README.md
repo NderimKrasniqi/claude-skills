@@ -12,6 +12,10 @@ My Claude Code skills, packaged as a plugin marketplace.
 4. `solution-design` → `docs/architecture.md`
 5. `implementation-plan` → `docs/implementation-plan.md` + `.workflow/tasks.json`
 
+## Using the workflow
+
+When starting a new project or a large feature from an idea, run the skills in order — each one requires the previous one's document to be approved. `product-discovery` writes the project's `AGENTS.md`, which maps all the docs for later sessions.
+
 ## Install
 
 Once per machine:
