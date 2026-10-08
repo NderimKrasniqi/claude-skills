@@ -49,8 +49,6 @@ Maintain `docs/architecture.md` as the single current-state technical source of 
 
 Keep `docs/architecture.md` operational: current stack, system map, data/authority boundaries, key flows, security/runtime constraints, verification gates, and a compact **Architecture Decisions** section. Product behavior and library tutorials do not belong here. Soft target: **<= 16 KB**; compress superseded ADR prose before splitting.
 
-Keep product behavior in specs/domain docs, not in architecture.
-
 Append an `ADR-xx` subsection under **Architecture Decisions** in `docs/architecture.md` only when all three are true:
 1. the decision is costly to reverse,
 2. a future reader would reasonably ask why it was made,

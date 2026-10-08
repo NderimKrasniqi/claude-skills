@@ -10,14 +10,7 @@
 
 ## Code quality
 
-Review meaningful improvements in:
-1. correctness,
-2. readability,
-3. maintainability,
-4. performance where material,
-5. language/framework/project best practices.
-
-Do not create stylistic churn when the existing implementation is already clear and correct.
+Review for material improvements. Do not create stylistic churn when the existing implementation is already clear and correct.
 
 ## Testing
 
@@ -40,7 +33,7 @@ Planning can use broad context. Each implementation task starts in a fresh focus
 Project docs are living sources of truth. Update the smallest authoritative set when truth changes:
 - product problem/solution/journey/constraint → `docs/product.md`
 - domain language/rule/invariant/state transition → `docs/domain.md`
-- observable journey behavior → `docs/specs.md#J-xx`
+- observable journey behavior → the `J-xx` section of `docs/specs.md`
 - current technology/architecture choice → `docs/architecture.md`
 - current system structure/boundary/major flow → `architecture.md`
 - consequential technical decision → a new ADR; supersede rather than rewrite history
