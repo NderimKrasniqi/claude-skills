@@ -11,7 +11,7 @@
 - **Key flows** — <one line per important flow>
 
 ## Verification Gates
-- <Checks every task must pass, e.g. typecheck, unit, e2e>
+- <Applicable type/build/static checks; focused feature E2E; prerequisite deferrals require an explicit downstream coverage boundary. No default unit/integration suites or TDD.>
 
 ## Architecture Decisions
 ### ADR-01 — <Decision title>

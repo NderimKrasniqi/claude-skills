@@ -1,15 +1,18 @@
 ---
 name: implementation-plan
-description: "Turn approved product scope, domain rules, journey specs, and solution design into a dependency-safe phased plan of small vertical tasks in docs/implementation-plan.md and .workflow/tasks.json. Use after solution design is approved, or when approved upstream changes add work to an existing plan. Does not write code."
+description: "Turn approved product scope, domain rules, journey specs, and solution design into a dependency-safe phased plan of small vertical tasks in docs/implementation-plan.md and .workflow/tasks.json. Use after solution design is settled, or when approved upstream changes add work to an existing plan. Does not write code."
 metadata:
-  version: "3.0"
+  version: "4.0"
 ---
 
 # Implementation Plan
 
+Read and apply the [shared workflow contract](../product-discovery/references/workflow-contract.md) before the skill-specific passes below. It defines cumulative decisions, completion evidence, minimal upstream correction and the planning/execution boundary. For direct filesystem/CLI operation only, use the [standalone host](../product-discovery/references/cli-host.md); managed hosts supply those mechanics.
+
+
 ## Entry gate
 
-Require approved/current `docs/product.md`, `docs/domain.md`, `docs/specs.md`, and `docs/architecture.md`. No open technical unknown may remain if its answer could change task order or acceptance. If anything upstream is open, route it back instead of planning around it.
+Require current `docs/product.md`, `docs/domain.md`, `docs/specs.md`, and `docs/architecture.md` grounded in settled owner decisions and completed upstream reasoning. No open technical unknown may remain if its answer could change task order or acceptance. If anything upstream is open, route it back instead of planning around it.
 
 Do not implement code.
 
@@ -108,13 +111,11 @@ Preserve task IDs; never renumber referenced tasks.
 
 ## Validation
 
-Run from the project root before presenting the checkpoint:
+Use the host's structural/reference/dependency validation. Direct CLI operation follows the standalone host reference; ai-os validates the six staged files. Explain warnings and report unavailable checks as pending, never passed. Structural validation does not prove source trace or capability producers: supply the concrete reasoning evidence below.
 
-```bash
-python3 tools/validate-workflow.py
-```
+## Verification boundaries
 
-It must pass. Explain any warnings. If the tool is missing, run the project setup from product-discovery (files in `../product-discovery/assets/project-setup/`, relative to this skill's directory) first; never skip validation.
+Read the project's engineering policy. Plan focused E2E for completed features and meaningful user-visible edge cases, with applicable static/build checks. Do not add default unit/integration suites or TDD. For a genuine enabling prerequisite, name why feature E2E cannot usefully run yet and the downstream dependent feature that covers it. Present that boundary for explicit host/owner approval; never waive the release gate's E2E. Keep this proposal in handoff evidence/host metadata rather than adding unsupported keys to tasks.json or expanding the two-line task format.
 
 ## Phase-exit checkpoint
 
@@ -129,4 +130,4 @@ Present the whole plan as one reviewable unit — never task-by-task approval. I
 - **Decisions for the user** — only genuine choices: order trade-offs, granularity, deferrals,
 - **Unresolved planning decisions** — must be `None` to exit.
 
-Ask for one approval of order and granularity. After approval, set **Status:** Approved and stop; implementation begins in a fresh context.
+When the four checks and upstream criteria have concrete evidence and no material gap remains, report planning complete. Present genuine order, granularity and verification-boundary choices together, reusing choices already accepted. The owner reviews the complete build plan once before separately authorizing execution (for example, Start factory); do not ask for task-by-task or ceremonial phase approval. Keep **Status:** Draft until an actual plan approval is supplied. Planning does not write code or start implementation; the execution host prepares fresh focused contexts.

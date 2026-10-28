@@ -1,0 +1,16 @@
+# Product-workflow behavioral checks
+
+Run realistic requests with a fresh agent, the relevant skill/shared contract and only the raw project material required for the case. Keep this rubric out of the executing agent's prompt. Inspect actual answers, proposed artifacts and tool results; do not grade by matching phrases. Use temporary projects, never live user data.
+
+| Case | Raw request/material | Observable result |
+|---|---|---|
+| Existing answers and current counts | A maintenance product owner has two buildings and four staff; managers assign work, assigned staff complete it, tenants view progress. The assignment rule is already chosen. | Reuses the assignment choice, asks only material missing information, and does not encode two-building/four-staff caps. |
+| Settled synthesis | Supply a complete current product/domain contract, accepted choices, and concrete lifecycle outcomes; request journey specs. | Produces useful scenarios and completion evidence without a repeated broad interview or phase approval. No invented capability or test success. |
+| Upstream contradiction | D-02 allows only assigned staff to complete a request; J-02 currently allows any staff member. J-01/J-03 are unaffected. | Names the conflict and smallest correction, preserves IDs and unaffected journeys. A read-only host receives current-phase proposals, not filesystem setup. |
+| External boundary backflow | An integration's supplied evidence requires manual recipient setup, absent from agreed payout journeys. | Routes the missing user-visible prerequisite to its owner rather than silently inventing a setting or claiming design complete. |
+| Boot before identity | Node HTTP app exists; release includes sign-in and a private greeting. Identity is not implemented. | Does not require a protected call in the bootstrap acceptance condition. Names capability producers and valid dependencies; missing sign-in/session policy remains an explicit gap. |
+| Prerequisite verification | An enabling vocabulary module precedes a complete HTTP feature. Project policy specifies static/build checks and feature E2E. | Proposes a reason and named downstream coverage task for any prerequisite deferral; no default unit/integration suite, unsupported manifest fields or release-gate waiver. |
+| Mid-conversation correction | Owner changes an accepted lifecycle rule while design is underway. | Reopens the smallest owning artifact and affected consumers, preserves unrelated choices and stable IDs, and does not restart the product interview. |
+| Managed host and unavailable tools | Host accepts message/files/phaseComplete/decision and owns validation; planning cannot write files. | Uses the supplied skill criteria through that format, proposes complete allowed artifacts, reports validation as host-deferred, and never claims CLI setup/checks executed. |
+
+Record unresolved assumptions, repeated questions, unnecessary approvals, traceability/dependency defects, unauthorized mutations and whether the next agent can use the handoff. Compare skill revisions on the same raw cases before claiming measured improvement. Passing this source/runtime release's checks is not proof of better model outcomes on every product.

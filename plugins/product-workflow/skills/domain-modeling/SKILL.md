@@ -2,20 +2,23 @@
 name: domain-modeling
 description: "Sharpen and maintain the product's domain language and business rules after scope is understood. Use when terms, invariants, state transitions, or domain boundaries are unclear or changing."
 metadata:
-  version: "2.0"
+  version: "3.0"
 ---
 
 # Domain Modeling
 
+Read and apply the [shared workflow contract](../product-discovery/references/workflow-contract.md) before the skill-specific passes below. It defines cumulative decisions, completion evidence, minimal upstream correction and the planning/execution boundary. For direct filesystem/CLI operation only, use the [standalone host](../product-discovery/references/cli-host.md); managed hosts supply those mechanics.
+
+
 ## Entry gate
 
-Require an approved/current product scope whose discovery checkpoint has no unresolved product decision that would force domain modeling to invent user-visible policy. If the scope is not closed, return the exact unresolved items to `product-discovery` before modeling them as invariants.
+Require current product scope grounded in settled owner decisions, with no unresolved product decision that would force domain modeling to invent user-visible policy. If the scope is not closed, return the exact unresolved items to `product-discovery` before modeling them as invariants.
 
 Actively sharpen the domain model; do not turn it into architecture documentation.
 
 Use the approved product journeys as context. Discuss concrete scenarios to expose ambiguity and edge cases. When the user uses vague or overloaded language, propose a precise canonical term. When an existing repo disagrees with the intended domain model, surface the contradiction instead of silently choosing one.
 
-**Delta mode.** For a change to an existing product, touch only the terms, invariants, and state models the change affects. If it affects none, say so in one line and skip the checkpoint, but still run the validator.
+**Delta mode.** For a change to an existing product, touch only the terms, invariants, and state models the change affects. If it affects none, record that evidence and validate the relevant relationships through the host; no phase approval is needed.
 
 ## Decision batching
 
@@ -57,7 +60,7 @@ Use these as internal reasoning passes, not as a questionnaire:
 
 The lenses generate product-specific questions; do not mechanically ask about every lens. If a discovered ambiguity changes product scope or user-visible policy, route it back to product discovery rather than silently promoting it to a domain invariant.
 
-**Noticeability test.** Before approving any rule, ask: *could a user notice this exists?* A new action, button, undo, reset, removal, or setting always passes this test. Such a rule is a product decision: get the user's approval, then add it to `docs/product.md` (journey summary or constraint) in the same change as `docs/domain.md`. The domain may define the rule's mechanics, but `product.md` must name the capability.
+**Noticeability test.** Before approving any rule, ask: *could a user notice this exists?* A new action, button, undo, reset, removal, or setting always passes this test. Such a rule belongs to the product contract: reuse an already accepted choice or resolve the new consequential choice, then route the smallest product/domain correction through the shared contract. Update product and domain together only when the host authorizes that multi-document change. The domain may define the rule's mechanics, but `product.md` must name the capability.
 
 ### Invariant promotion test
 
@@ -68,7 +71,7 @@ Before creating a numbered invariant, require at least one of these to be true:
 
 If the statement only answers **"when may this transition happen?"**, **"what state follows?"**, **"what does the user see?"**, or **"what validation error occurs?"**, keep it in the lifecycle/spec rather than promoting it.
 
-For a normal small/medium product, aim for roughly **12–30 core invariants**. This is a diagnostic range, not a hard cap: a genuinely complex regulated/financial domain may justify more. If a small product exceeds ~30, perform a clustering pass before exit and explain why any excess is irreducible. Never merge unrelated rules merely to hit a number.
+Use only the invariants the actual domain requires; never fill a quota. If a small product approaches roughly 30 core invariants, inspect whether transition guards or scenario outcomes were promoted unnecessarily. A complex domain may justify more. Explain irreducible complexity rather than merging unrelated rules to hit a count.
 
 ### State-model completeness audit
 
@@ -107,7 +110,7 @@ When a domain refactor genuinely requires an identifier migration:
 - build an explicit old -> new mapping;
 - update every downstream `D-xx` reference in the same change;
 - reject positional references such as `domain 12-18`, which become meaningless after clustering;
-- run `python3 tools/validate-workflow.py` before approval.
+- run the host's structural/reference checks before completion.
 
 Prefer keeping a stable invariant ID and refining its wording when the durable truth is unchanged.
 
@@ -126,9 +129,9 @@ Before declaring domain modeling complete, present a compact checkpoint containi
 - **State models** — meaningful lifecycles/transitions now defined and completeness audit passed,
 - **Domain boundaries** — only if any were needed,
 - **Contradictions found** — scope/spec/repo disagreements and their resolution,
-- **Product backflow** — every user-noticeable capability introduced in this phase and the `docs/product.md` line that now names it, or `None`,
+- **Product backflow** — each affected product ID/section and the smallest correction proposed or performed under host authority, or `None`,
 - **Unresolved domain questions** — must be `None` to exit,
-- **Validation** — output of `python3 tools/validate-workflow.py` from the project root; must pass, warnings explained. If the tool is missing, run the project setup from product-discovery (files in `../product-discovery/assets/project-setup/`, relative to this skill's directory) first; never skip validation,
+- **Validation** — the host's actual structural/reference results, with warnings explained; report unavailable checks as pending rather than inventing a pass.
 - **Exit criteria** — state whether the approved journeys can now be described without inventing business rules.
 
-Ask for a single approval when new consequential domain decisions were made in the phase. If all rules were already settled upstream and this phase only normalized language, report the checkpoint without forcing ceremonial approval.
+Use the shared completion contract. Resolve only consequential domain choices still open; record existing accepted choices once. Normalized language and phase closure require no extra approval. A missing upstream rule uses the minimal correction handoff.

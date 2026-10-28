@@ -13,7 +13,7 @@ This project is planned with the workflow skills: product-discovery → domain-m
 | `docs/implementation-plan.md` | The build order | Phases; one line per task plus a `Done when:` acceptance line; `[x] … ✅` when complete | `TASK-xx` | implementation-plan |
 | `.workflow/tasks.json` | Machine bookkeeping for the plan (never edit by hand into Markdown) | Per task: `deps`, `refs`, one `releaseGate`, temporary `gates` | `TASK-xx` keys | implementation-plan |
 | `docs/engineering-principles.md` | How code is written, tested, and reviewed | Development, quality, testing, security, Definition of Ready/Done | — | the team |
-| `tools/validate-workflow.py` | Structural checker for all of the above | Run `python3 tools/validate-workflow.py` after changing any document | — | — |
+| `tools/validate-workflow.py` | Structural checker for all of the above | Standalone CLI: run the project checker after document changes; managed hosts validate staged proposals | — | — |
 
 ## Where to find what
 
@@ -27,7 +27,7 @@ This project is planned with the workflow skills: product-discovery → domain-m
 | What should happen when a user does X, including errors? | `docs/specs.md` → the `J-xx` section |
 | What tech do we use, and which component is authoritative for what? | `docs/architecture.md` → Technology Stack / System Architecture |
 | Why was technical decision X made? | `docs/architecture.md` → Architecture Decisions (`ADR-xx`) |
-| What should I build next, and when is it done? | `docs/implementation-plan.md` → first unchecked task whose deps are all `[x] … ✅`; its `Done when:` line |
+| What should I build next, and when is it done? | `docs/implementation-plan.md` → the next task whose prerequisites have actual accepted/integrated evidence; its `Done when:` line |
 | What does task X depend on / which sources does it trace to? | `.workflow/tasks.json` → `deps` / `refs` |
 | How should I test this? | `docs/engineering-principles.md` → Testing |
 
@@ -36,4 +36,5 @@ This project is planned with the workflow skills: product-discovery → domain-m
 - Read narrowly: load the task line, its `Done when:`, and only the `J-xx` / `D-xx` / `ADR-xx` sections its `refs` name. Expand only for a concrete ambiguity.
 - Never invent a product, domain, or design decision while coding. If one is missing, stop and resolve it in the owning document via its skill.
 - When truth changes, update the one document that owns it (table above) and run the validator. Don't let docs, code, and tests tell different stories.
-- Work on one task at a time; do not automatically start the next.
+- Planning does not authorize implementation. A separately authorized execution host may select dependency-ready tasks and continue within explicit governance limits. Source checkboxes never establish runtime evidence.
+- Preserve folder ownership and cohesive responsibilities; use purposeful comments and applicable stack practices. Do not generate unit/integration suites or impose TDD by default; verify completed features with focused E2E.

@@ -2,10 +2,13 @@
 name: product-discovery
 description: "Think through a product idea, problem, or proposed feature with the user until the problem, solution, product journeys, constraints, and first useful scope are clear. Use before domain modeling or technical design."
 metadata:
-  version: "4.0"
+  version: "5.0"
 ---
 
 # Product Discovery
+
+Read and apply the [shared workflow contract](references/workflow-contract.md) before the skill-specific passes below. It defines cumulative decisions, completion evidence, minimal upstream correction and the planning/execution boundary. For direct filesystem/CLI operation only, use the [standalone host](references/cli-host.md); managed hosts supply those mechanics.
+
 
 Act as an experienced product engineer thinking alongside the user.
 
@@ -16,17 +19,6 @@ Have a natural conversation. Research facts yourself when the repo, supplied mat
 Recommend, challenge, and suggest when useful. The user owns consequential product decisions unless they explicitly delegate them.
 
 **Delta mode.** For a change to an existing product, read `docs/product.md` first, discuss only what the change affects, keep existing journey IDs, and add new journeys with the next free ID. A small change that adds no journey, constraint, or scope still gets the stress-test and assumption audit, but the checkpoint may be a few lines.
-
-## Project setup
-
-Before writing any document, make sure the project root has the workflow files. Copy each one from `assets/project-setup/` in this skill's directory **only if it is missing**:
-- `AGENTS.md` — the project map every coding agent loads. If an `AGENTS.md` already exists, do not overwrite it: append the template's content under a `## Planning workflow` heading, unless that heading is already present.
-- `docs/engineering-principles.md`
-- `tools/validate-workflow.py`
-
-Never create a `CLAUDE.md`. But if the project already has a `CLAUDE.md`, `.claude/CLAUDE.md`, or `CLAUDE.local.md`, Claude Code reads that instead of `AGENTS.md`, so the map would be silently ignored: make sure one of those files contains an `@AGENTS.md` import (prefer the root `CLAUDE.md`; from `.claude/CLAUDE.md` the path is `@../AGENTS.md`), adding it as the first line if missing, and keep everything else in it.
-
-Tell the user in one line which files were created or extended. Never overwrite an existing file.
 
 ## Discovery questioning loop
 
@@ -128,7 +120,7 @@ Also distinguish unresolved **product** decisions from intentional downstream ha
 
 ## Phase-exit checkpoint
 
-Do not drift silently into domain modeling or solution design.
+Complete the discovery reasoning before handing off. Within an authorized continuous workflow, the host moves to domain modeling using the same answers; do not ask the user to start another stage.
 
 When discovery appears complete, present one compact checkpoint containing:
 - **Problem** — the problem and target actors,
@@ -143,11 +135,9 @@ When discovery appears complete, present one compact checkpoint containing:
 - **Lens coverage** — each of the seven lenses: what it surfaced, or why it does not apply to this product (one line each),
 - **Exit criteria** — explicitly state whether problem, solution, journeys, constraints, and first useful scope are clear and have survived the stress-test.
 
-Ask for one approval of the checkpoint. If the user changes specific items, revise only those items and re-present the affected checkpoint content rather than restarting discovery.
+Use the shared completion contract. Obtain judgment only for consequential product choices still unresolved; do not seek another phase approval for choices already accepted. If the user corrects an item, revise that item and affected relationships without restarting discovery.
 
-After approval, create or update `docs/product.md` using `assets/product-template.md`. Keep it concise. For an existing product, preserve unaffected scope and stable journey IDs. Each journey is a `### J-01 — <name>` heading; the validator parses exactly that form.
-
-Then run `python3 tools/validate-workflow.py` from the project root and report the result. It must pass; if it fails, fix the document's format (not its approved content) and re-run before declaring discovery complete. If the tool is missing, run the project setup from product-discovery (files in `../product-discovery/assets/project-setup/`, relative to this skill's directory) first; never skip validation.
+Create or update the evolving `docs/product.md` draft with `assets/product-template.md`, preserving unaffected scope and stable journey IDs. Each journey is a `### J-01 — <name>` heading. Completion requires evidence for the criteria above and the host's structural checks. Keep source status Draft unless the owner explicitly approved that artifact; completion alone does not imply approval.
 
 ### Durable-doc compression rule
 

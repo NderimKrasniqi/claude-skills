@@ -1,15 +1,18 @@
 ---
 name: journey-specification
-description: "Turn approved product journeys and domain decisions into living behavioral specifications. Use after product discovery/domain modeling, before technical design or implementation. Synthesize settled behavior rather than reopening product discovery."
+description: "Turn settled product journeys and domain decisions into living behavioral specifications. Use after product discovery/domain modeling, before technical design or implementation. Synthesize settled behavior rather than reopening product discovery."
 metadata:
-  version: "2.0"
+  version: "3.0"
 ---
 
 # Journey Specification
 
+Read and apply the [shared workflow contract](../product-discovery/references/workflow-contract.md) before the skill-specific passes below. It defines cumulative decisions, completion evidence, minimal upstream correction and the planning/execution boundary. For direct filesystem/CLI operation only, use the [standalone host](../product-discovery/references/cli-host.md); managed hosts supply those mechanics.
+
+
 ## Entry gate
 
-Require approved/current product scope and a domain-modeling checkpoint with no unresolved business rule needed by the release journeys. If a required rule is still open, route it to product discovery/domain modeling instead of encoding a guess in a spec.
+Require current product scope and domain truth grounded in settled owner decisions, with no unresolved business rule needed by the release journeys. If a required rule is still open, route it to product discovery/domain modeling instead of encoding a guess in a spec.
 
 Synthesize what has already been decided into focused, living journey sections in `docs/specs.md`.
 
@@ -67,8 +70,8 @@ Before moving to solution design, present a compact checkpoint containing:
 - **Journeys specified** — IDs/titles and artifact paths,
 - **Behavioral coverage** — happy paths plus meaningful failure/edge behavior represented; list any user-visible domain rule or state transition with no demonstrating scenario (should be `None`), and the chained scenarios walked in the cross-journey pass,
 - **Upstream references** — all referenced `D-xx` IDs resolve to the current domain model; no positional/stale domain references remain,
-- **Validation** — output of `python3 tools/validate-workflow.py` from the project root; must pass, warnings explained. If the tool is missing, run the project setup from product-discovery (files in `../product-discovery/assets/project-setup/`, relative to this skill's directory) first; never skip validation,
+- **Validation** — the host's actual structural/reference results, with warnings explained; report unavailable checks as pending rather than inventing a pass.
 - **Unresolved behavior** — must be `None` to exit; otherwise name the upstream phase that owns it,
 - **Exit criteria** — state whether every approved journey needed for the planned release now has an observable behavioral contract.
 
-Do not ask for line-by-line approval of every spec. Ask for one phase approval only if the specification phase introduced or changed consequential behavior; otherwise report completion and proceed according to the workflow.
+Use the shared completion contract. Resolve any newly discovered consequential behavior through its upstream owner, preserving unaffected journeys. When behavior is already settled, report evidence and completion without a spec-by-spec or phase approval.
