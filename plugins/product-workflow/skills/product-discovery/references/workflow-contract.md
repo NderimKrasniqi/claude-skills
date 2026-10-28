@@ -12,6 +12,8 @@ Distinguish user-stated facts, explicitly accepted proposals, necessary conseque
 
 Ask for judgment when a choice materially changes scope, business rules, observable behavior, cost, security/privacy, a costly-to-reverse design commitment, or execution authority, unless the user has already delegated that choice. Show the recommended choice, viable alternatives and concrete consequences. Combine related independent choices when helpful; use one question when its answer changes what follows. Leave free-text correction possible.
 
+Not every observable detail is a consequential product choice. Use existing project/stack conventions for routine protocol, presentation and naming details that preserve the agreed capabilities, rules, authority, meaningful success/failure guarantees, cost and security boundaries. Document the chosen default briefly where it belongs and leave it revisable; do not promote it to an owner-approved product rule or create a decision gate solely because a client could observe it. Escalate when alternatives actually change those material boundaries or existing client commitments, not simply because several technically valid defaults exist.
+
 Reuse accepted answers. Do not ask again for an obvious consequence, normalized terminology, wording, routine synthesis or merely because a phase ended. If an accepted decision must change, identify the new evidence and affected behavior. A completed phase reports its result and next handoff; it does not manufacture a fresh approval gate.
 
 ## Drafts and completion evidence

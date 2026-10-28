@@ -2,7 +2,7 @@
 name: journey-specification
 description: "Turn settled product journeys and domain decisions into living behavioral specifications. Use after product discovery/domain modeling, before technical design or implementation. Synthesize settled behavior rather than reopening product discovery."
 metadata:
-  version: "3.0"
+  version: "3.1"
 ---
 
 # Journey Specification
@@ -17,6 +17,8 @@ Require current product scope and domain truth grounded in settled owner decisio
 Synthesize what has already been decided into focused, living journey sections in `docs/specs.md`.
 
 **Delta mode.** For a change to an existing product, edit or add only the affected `J-xx` sections, then re-run the reference checks. Unaffected sections stay untouched.
+
+Ordinary technical response details can be specified using established project/stack conventions when they preserve the settled product contract. Keep these revisable defaults in specs/design; do not reopen product discovery for a routine protocol detail. Route upstream only if it changes a product capability, authority/business rule, meaningful failure guarantee or another material boundary under the shared contract.
 
 Do not run a broad interview here. If a material behavior or business rule is genuinely unresolved, surface the exact ambiguity and return to product discovery or domain modeling instead of guessing.
 
